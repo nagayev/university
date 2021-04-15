@@ -1,22 +1,26 @@
+#include "stdafx.h"
 #include <iostream>
 #include <string>
 #include <vector>
-
+#include <conio.h>
+#include <Windows.h>
 using namespace std;
 
 int main()
 {
+	SetConsoleOutputCP(1251);
+    SetConsoleCP(1251);
     vector<string> v;
     string s, tmp;
-    getline(cin, s);
-    int words = 0;
     float max = 0.0f;
     int symbols, all_symbols;
     symbols = 0;
     all_symbols = 0;
+	cout<<"Введите текст: ";
+	getline(cin, s);
     for (int i = 0; i < s.size(); i++)
     {
-        if (isspace(s[i]))
+        if (isspace(s[i]) || s[i]=='.')
         {
             v.push_back(tmp);
             tmp = "";
@@ -45,10 +49,11 @@ int main()
                 symbols++;
             }
         }
-        if (symbols / all_symbols > max)
-            max = symbols / all_symbols;
+        if (symbols*1.0 / all_symbols > max)
+            max = 1.0*symbols / all_symbols;
     }
     //find words max
+	cout<<"Искомое слово (слова): ";
     for (int i = 0; i < v.size(); i++)
     {
         all_symbols = v[i].size();
@@ -61,9 +66,11 @@ int main()
                 symbols++;
             }
         }
-        if (symbols / all_symbols == max)
-            cout << v[i];
+        if (symbols*1.0 / all_symbols == max && max!=0)
+            cout << v[i]<<" ";
     }
-    cout << endl;
+	if(max==0) cout<<"Некорректные данные";
+	cout << endl;
+	_getch();
     return 0;
 }
