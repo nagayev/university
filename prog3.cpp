@@ -39,7 +39,9 @@ int main()
     //find max
     for (int i = 0; i < v.size(); i++)
     {
-        all_symbols = v[i].size();
+        all_symbols=0;
+        for(int k=0;k<v[i].size();k++)
+            if (v[i][k]!='.' && v[i][k]!='!' && v[i][k]!='?' && v[i][k]!=';') all_symbols++;
         symbols = 0;
         for (int j = 0; j < all_symbols; j++)
         {
@@ -49,14 +51,16 @@ int main()
                 symbols++;
             }
         }
-        if (symbols*1.0 / all_symbols > max)
-            max = 1.0*symbols / all_symbols;
+        if ((float)symbols / all_symbols > max)
+            max = (float)symbols / all_symbols;
     }
     //find words max
 	cout<<"Искомое слово (слова): ";
     for (int i = 0; i < v.size(); i++)
     {
-        all_symbols = v[i].size();
+        all_symbols=0;
+        for(int k=0;k<v[i].size();k++)
+            if (v[i][k]!='.' && v[i][k]!='!' && v[i][k]!='?' && v[i][k]!=';') all_symbols++;
         symbols = 0;
         for (int j = 0; j < v[i].size(); j++)
         {
@@ -66,7 +70,7 @@ int main()
                 symbols++;
             }
         }
-        if (symbols*1.0 / all_symbols == max && max!=0)
+        if ((float)symbols / all_symbols == max && max!=0)
             cout << v[i]<<" ";
     }
 	if(max==0) cout<<"Некорректные данные";
