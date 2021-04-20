@@ -43,22 +43,20 @@ var
   p,b: link;
   i,mult:integer;
 begin
-  {
-    Дан цепной односвязный список, элементами которого являются целые
-  числа. В односвязном списке найти: произведение двузначных положительных
-  чисел.
-  }
   b:=nil;
   mult:=1;
   for i:=0 to memo1.lines.count-1 do begin
     new(p);
     p^.g:=strtoint(Memo1.lines[i]);
-    if (p^.g>=10) and (p^.g<=99) then
-       mult:=mult*p^.g;
     p^.v:=b;
     b:=p;
+  end;
+  //просмотр списка
+  while p<>nil do begin
+    if (p^.g>=10) and (p^.g<=99) then
+       mult:=mult*p^.g;
+    p:=p^.v;
   end;
   Edit1.text:=inttostr(mult);
 end;
 end.
-
